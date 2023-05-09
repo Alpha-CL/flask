@@ -1,0 +1,7 @@
+requests==2.28.2        # ajax
+urllib3==1.26.15        # url parse and create
+rq==1.13.0              # regexp
+python-dotenv==1.0.0    # load target environs file
+environs==9.5.0         # parse environment variables
+colorama==0.4.6         # print colored logs
+
