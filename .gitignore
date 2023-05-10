@@ -1,0 +1,20 @@
+# webstorm
+.idea
+
+# Packages
+bin
+var
+lib
+lib64
+__pycache__
+
+# Installer logs
+pip-log.txt
+
+#  Mr Developer
+venv
+.env
+.flaskenv
+*.swp
+*.log
+
