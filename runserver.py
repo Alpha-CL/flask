@@ -1,7 +1,6 @@
 import os
 
 from dotenv import load_dotenv
-from gunicorn.app.wsgiapp import WSGIApplication
 from app import create_app
 
 FLASK_ROOT_DIR = os.getenv("FLASK_ROOT_DIR")
