@@ -6,6 +6,6 @@
 flask run
 
 # production
-gunicorn --workers 4 --worker-class gthread runserver:app -b 0.0.0.0:18080
+gunicorn --workers 4 -b :18080 --worker-class gthread --access-logfile - --error-logfile - runserver:app
 
 ```
