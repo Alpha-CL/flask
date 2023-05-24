@@ -1,5 +1,5 @@
 #!/bin/bash
-source venv/bin/activate
+source ./venv/bin/activate
 # init database
 while true; do
     flask db upgrade
