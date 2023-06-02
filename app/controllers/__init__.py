@@ -1,14 +1,26 @@
-import sys
-
 from flask import Blueprint
 from flask_restful import Api
-from app.utils.module import import_all
 
-controllers_url_prefix = ''
-controllers_bp = Blueprint('controllers', __name__, url_prefix='')
+from werkzeug.utils import import_string
+
+# create blueprint
+controllers_url_prefix = '/controllers'
+controllers_bp = Blueprint('controllers', __name__, url_prefix=controllers_url_prefix)
 controllers_api = Api(controllers_bp)
 
 
 def init_app(app):
-    app.register_blueprint(controllers_bp, url_prefix=controllers_url_prefix)
-    import_all(__file__, __name__, __path__, app=app)
+    # mount blueprint node
+    app.register_blueprint(controllers_bp)
+
+    blueprints = [
+        "app.controllers.apis",
+        "app.controllers.auth",
+    ]
+    for blueprint in blueprints:
+        # import blueprint package
+        import_string(blueprint).init_app(app)
+
+
+# import module
+from . import apis, auth

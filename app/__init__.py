@@ -40,7 +40,7 @@ def create_app(config=Config):
     extensions.init_app(app)
     controllers.init_app(app)
 
-    # print(f'[url_map]: {app.url_map}')  # print all route
+    print(f'[url_map]: {app.url_map}')  # print all route
 
     return app
 

@@ -5,7 +5,7 @@ import sys
 from werkzeug.utils import import_string
 
 
-def import_all_module(file, name, path, prefix=None, callback=None, black_list=None) -> None:
+def import_all_module(file, name, path, app=None, prefix=None, callback=None, black_list=None) -> None:
     """
     :param file:        __file__    /xxx/xxx/xxx.ext
     :param name:        __name__    xxx
@@ -34,17 +34,20 @@ def import_all_module(file, name, path, prefix=None, callback=None, black_list=N
         else:
             module_path = f"{prefix}.{current_file_name}.{child_file}"
 
+        for ppp in iter_modules:
+            print(f'import path: {ppp}')
+
         try:
             if child_file not in file_black_list:
                 if is_pkg and callback is not None and hasattr(callback, "__call__"):
-                    callback(module_path)
+                    callback(module_path, app)
                 else:
                     __import__(module_path)
         except Exception as err:
             raise ImportError(f"import all module error: {err}")
 
 
-def import_all(file, name, path, app=None, *args) -> None:
+def import_all(file, name, path, app=None, *args, **kwargs) -> None:
     """
     :param file:        __file__   [/xxx/xxx/xxx]
     :param name:        __name__   /xxx/xxx/xxx.py
@@ -53,14 +56,18 @@ def import_all(file, name, path, app=None, *args) -> None:
     :param args:        prefix, black_list
     """
 
-    def callback(module_path):
+    def callback(module_path, app):
         import_blueprint(module_path, app)
 
-    import_all_module(file, name, path, callback=callback, *args)
+    import_all_module(file, name, path, app=app, callback=callback, *args, **kwargs)
 
 
 def import_blueprint(blueprint, app) -> None:
     import_string(blueprint).init_app(app)
+
+
+def import_file():
+    pass
 
 
 def import_parent_package(path=None) -> None:
