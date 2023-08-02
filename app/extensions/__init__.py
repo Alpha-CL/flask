@@ -22,7 +22,7 @@ scheduler = APScheduler()
 
 def init_app(app):
     app.redis = Redis.from_url(app.config['REDIS_URL'])
-    app.task_queue = rq.Queue('microblog-tasks', connection=app.redis)
+    app.task_queue = rq.Queue('redis_tasks_queue', connection=app.redis)
 
     db.init_app(app)
     migrate.init_app(app, db)
