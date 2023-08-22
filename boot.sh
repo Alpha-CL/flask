@@ -11,4 +11,4 @@ while true; do
 done
 # run start app
 pkill -f boot.sh && kill -9 $(ps aux | grep 'runserver' | awk '{print $2}')
-exec gunicorn --workers 4 -b :18080 --worker-class gthread --access-logfile - --error-logfile - runserver:app
+exec gunicorn --workers 4 -b :8181 --worker-class gthread --access-logfile - --error-logfile - runserver:app
