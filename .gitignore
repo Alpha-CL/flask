@@ -14,7 +14,6 @@ pip-log.txt
 #  Mr Developer
 venv
 .env
-.flaskenv
 *.swp
 *.log
 
